@@ -14,11 +14,6 @@ import os
 from scrapy.http import Request
 import xmltodict
 
-class AppItem(scrapy.Item):
-    category = scrapy.Field()
-    name = scrapy.Field()
-    url = scrapy.Field()
-
 class TumblrSpider(scrapy.Spider):
     """
     Usage:
