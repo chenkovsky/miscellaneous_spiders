@@ -33,13 +33,13 @@ class SynonymsSpider(scrapy.Spider):
         for fname in kwargs["vocab"].split(","):
             with open(fname) as fi:
                 for l in fi:
-                    phrases.add("-".join(l.split()))
+                    phrases.add(l.strip())
         self.phrases = list(phrases)
 
     def start_requests(self):
         for phrase in self.phrases:
             yield Request(
-                self.base_url.format(phrase=phrase),
+                self.base_url.format(phrase="-".join(phrase.split())),
                 headers=self.header(),
                 callback=self.parse,
                 meta={"phrase": phrase, "page": 1})
